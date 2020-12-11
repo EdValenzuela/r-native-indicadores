@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Text, StyleSheet, View, Button, FlatList } from 'react-native';
 import { myIndicatorContext } from '../context/IndicatorsContext';
 
-import CardIndicator from '../components/CardIndicator';
+import CardIndicator from '../components/cardIndicator';
 
 const Home = ({navigation}) => {
 
