@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Button } from 'react-native';
 
 const Detail = ({navigation, route}) => {
 
-    const {codigo} = route.params;
+    console.log("params =>", route.params);
 
     const goToBack = ()=>{
         navigation.push('Home');
@@ -11,7 +11,7 @@ const Detail = ({navigation, route}) => {
 
     return (
         <View style={styles.contenedor}>
-            <Text>{codigo}</Text>
+            <Text>dataaaaa</Text>
             <Button 
                 title="back"
                 onPress={ () => goToBack() } 

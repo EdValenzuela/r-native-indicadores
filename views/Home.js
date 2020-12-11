@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { Link } from '@react-navigation/native';
 import { Text, StyleSheet, View, Button, FlatList } from 'react-native';
 import { myIndicatorContext } from '../context/IndicatorsContext';
+
+import CardIndicator from '../components/CardIndicator';
 
 const Home = ({navigation}) => {
 
@@ -12,9 +13,8 @@ const Home = ({navigation}) => {
         total:500
     }
 
-    const visitarDetalle = (codigo) =>{
-        console.log(codigo);
-        navigation.navigate('Detail', codigo ? codigo : null);
+    const visitarDetalle = () =>{
+        navigation.navigate('Detail');
     }
 
     return (
@@ -26,16 +26,23 @@ const Home = ({navigation}) => {
                 onPress={ () => visitarDetalle() } 
             />
             {
-                Object.keys(data).forEach((e) => { 
-                    console.log(e,':', data[e].codigo);
-                    <Button
-                        classname="btn btn-primary" 
-                        title="ir a nosotros"
-                        onPress={ () => visitarDetalle(data[e].codigo) } 
-                    />
-                    // {<Link to={`/Detail/${data[e].codigo}`}>Ver detalle</Link>}
+                // Object.keys(data).forEach((e) => { 
+                //     console.log(e,':', data[e].codigo);
+                //     // <Button
+                //     //     classname="btn btn-primary" 
+                //     //     title="ir a nosotros"
+                //     //     onPress={ () => visitarDetalle(data[e].codigo && data[e].codigo) } 
+                //     // />
+
+                //     // {<Link to={`/Detail/${data[e].codigo}`}>Ver detalle</Link>}
                     
-                })
+                // })
+                <View style={styles.contenedor}>
+                    <FlatList
+                        data={Object.keys(data)}
+                        renderItem={({ item }) => <CardIndicator item={data[item]} />}
+                    />
+                </View>
             }
 
             
