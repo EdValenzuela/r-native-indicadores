@@ -1,6 +1,12 @@
 import React from 'react';
-import { Text, StyleSheet, View, Button, FlatList } from 'react-native';
+import { Text, StyleSheet, View, Button, FlatList, ScrollView } from 'react-native';
 import useFetch from '../hooks/useFetch';
+
+//CSS
+import globalStyles from '../styles/global';
+
+//Date
+import { transformDate } from '../helpers/transformDate';
 
 const Detail = ({navigation, route}) => {
   console.log('DetailScreen', route.params);
@@ -9,39 +15,32 @@ const Detail = ({navigation, route}) => {
   const [data, loading] = useFetch(`https://mindicador.cl/api/${codigo}`);
 
   const goToBack = () => {
-    navigation.push('Home');
+    navigation.goBack();
   };
 
   return (
-    <View style={styles.contenedor}>
-      <Text>{data.nombre}</Text>
-      <Text>{data.unidad_medida}</Text>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.letterDetail}>{data.nombre}</Text>
       {loading ? (
-        <Text> cargando...</Text>
+        <Text>Loading...</Text>
       ) : (
-        <FlatList
-          keyExtractor={(item) => Date.parse(item.fecha)}
-          data={data.serie}
-          renderItem={(item) => (
-            <View style={{padding: 5}}>
-              <Text>{item.item.fecha}</Text>
-              <Text>{item.item.valor}</Text>
-            </View>
-          )}
-        />
+        <ScrollView>
+          <FlatList
+            keyExtractor={(item) => item.fecha}
+            data={data.serie}
+            renderItem={(item) => (
+              <View style={globalStyles.boxDetail}>
+                <Text style={globalStyles.letterUnity}>{transformDate(item.item.fecha)}</Text>
+                <Text style={globalStyles.letterName}>${item.item.valor}</Text>
+              </View>
+            )}
+          />
+        </ScrollView>
       )}
 
-      <Button title="back" onPress={() => goToBack()} />
+      <Button title="Volver" onPress={() => goToBack()} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  contenedor: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
 
 export default Detail;

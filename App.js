@@ -42,10 +42,13 @@ const App = () => {
           <Stack.Screen 
             name="Detail"
             component={Detail}
-            options={{title:'Detalle'}}
-            // options={ ({route}) =>({
-            //   title: `Detalle indicador  ${route.params.autor}`
-            // }) }
+            // options={{title:'Detalle Indicador'}}
+            options={ ({route}) =>({
+              title: `Detail ${route.params.codigo}`,
+              headerTitleStyle:{
+                textTransform:'capitalize'
+              }
+            }) }
           />
         </Stack.Navigator>
       </NavigationContainer>

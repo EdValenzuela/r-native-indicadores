@@ -1,9 +1,11 @@
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const CardIndicator = (props) => {
-  const {item} = props;
+//CSS
+import globalStyles from '../styles/global';
+
+const CardIndicator = ({item}) => {
   const navigation = useNavigation();
 
   const goToDetail = (codigo) => {
@@ -13,19 +15,21 @@ const CardIndicator = (props) => {
 
   return (
     <>
-      <View>
-        <View>{item.nombre && <Text>{item.nombre}</Text>}</View>
-        <View>
-          {item.unidad_medida && <Text>{item.unidad_medida}</Text>}
+      <ScrollView style={globalStyles.boxIndicator}> 
+        <View>{item.nombre && <Text style={globalStyles.letterName}>{item.nombre}</Text>}</View>
+        <View style={globalStyles.boxDetail}>
+          {item.unidad_medida && <Text style={globalStyles.letterUnity}>{item.unidad_medida}</Text>}
 
           {item.unidad_medida && item.nombre ? (
-            <Button
-              title="See Details"
-              onPress={() => goToDetail(item.codigo)}
-            />
+            <View style={globalStyles.buttonDetail}>
+              <Button
+                title="See Details"
+                onPress={() => goToDetail(item.codigo)}
+              />
+            </View>
           ) : null}
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };

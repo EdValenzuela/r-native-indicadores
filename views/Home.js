@@ -1,61 +1,36 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, View, Button, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
+
+//Context
 import { myIndicatorContext } from '../context/IndicatorsContext';
 
+//Components
 import CardIndicator from '../components/cardIndicator';
 
-const Home = ({navigation}) => {
+//CSS
+import globalStyles from '../styles/global';
+
+const Home = () => {
 
     const { data, loading } = useContext(myIndicatorContext);
 
-    const information = {
-        id:1, 
-        total:500
-    }
-
-    const visitarDetalle = () =>{
-        navigation.navigate('Detail');
-    }
-
     return (
-        <View style={styles.contenedor}>
-            <Text>Inicio</Text>
-            <Button
-                classname="btn btn-primary" 
-                title="ir a nosotros"
-                onPress={ () => visitarDetalle() } 
-            />
+        <View style={globalStyles.container}>
             {
-                // Object.keys(data).forEach((e) => { 
-                //     console.log(e,':', data[e].codigo);
-                //     // <Button
-                //     //     classname="btn btn-primary" 
-                //     //     title="ir a nosotros"
-                //     //     onPress={ () => visitarDetalle(data[e].codigo && data[e].codigo) } 
-                //     // />
-
-                //     // {<Link to={`/Detail/${data[e].codigo}`}>Ver detalle</Link>}
-                    
-                // })
-                <View style={styles.contenedor}>
+                loading ? (
+                    <Text> cargando...</Text>
+                  ) : 
+                  (
                     <FlatList
                         data={Object.keys(data)}
                         renderItem={({ item }) => <CardIndicator item={data[item]} />}
+                        keyExtractor={item => item.codigo}
                     />
-                </View>
+                    // <Text>{JSON.stringify(data, null, 2) }</Text>
+                  )
             }
-
-            
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    contenedor:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
-    }
-})
 
 export default Home
