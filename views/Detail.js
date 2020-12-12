@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View, Button, FlatList, ScrollView } from 'react-native';
+import { Text, View, Button, FlatList, ScrollView } from 'react-native';
 import useFetch from '../hooks/useFetch';
 
 //CSS

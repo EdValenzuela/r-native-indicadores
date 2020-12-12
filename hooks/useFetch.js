@@ -1,14 +1,9 @@
 import React, {useState, useEffect} from 'react';
 
 const useFetch = (url) => {
-  //   let amiiboLocal = JSON.parse(localStorage.getItem('amiibos')) || [];
-
+  
   const [data, setData] = useState([]);
   const [fetching, setFetching] = useState(true);
-
-  //   useEffect(() => {
-  //     localStorage.setItem('amiibos', JSON.stringify(data));
-  //   }, [data]);
 
   useEffect(() => {
     console.log('useFetch', url);

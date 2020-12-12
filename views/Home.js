@@ -26,7 +26,6 @@ const Home = () => {
                         renderItem={({ item }) => <CardIndicator item={data[item]} />}
                         keyExtractor={item => item.codigo}
                     />
-                    // <Text>{JSON.stringify(data, null, 2) }</Text>
                   )
             }
         </View>
